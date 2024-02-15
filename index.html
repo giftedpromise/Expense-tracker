@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styl.css" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="balance">
+        <h2>Expense Tracker</h2>
+        <img src="logo.svg" alt="" style="width: 60px" />
+        <p>My Balance</p>
+        <h2>0</h2>
+      </div>
+      <div class="income-expense">
+        <p>INCOME</p>
+        <h4>0</h4>
+        <p>EXPENSE</p>
+        <h4>0</h4>
+      </div>
+      <div class="add-transaction">
+        <p>Add New Transaction</p>
+        <hr />
+      </div>
+      <div class="transaction-details">
+        <label for="inputTitle" class="inputName">Description</label>
+        <input
+          type="text"
+          id="inputTitle"
+          class="inputTitle"
+          placeholder="Enter Transaction description...."
+        />
+      </div>
+      <div class="amount-details">
+        <label for="inputTitle" class="inputName">Amount</label>
+        <input
+          type="text"
+          id="inputTitle"
+          class="inputTitle"
+          placeholder="Enter amount...."
+        />
+        <select name="Amount Type" id="amountType" class="amountType">
+          <option value="Income">Income</option>
+          <option value="Expense">Expense</option>
+        </select>
+      </div>
+      <div class="btnAdd">
+        <button type="submit" id="transaction-btn" class="transaction-btn">
+          Add transaction
+        </button>
+      </div>
+      <div class="history-section">
+        <h2>Transaction History</h2>
+        <hr />
+        <ul class="list" id="list"></ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
