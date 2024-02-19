@@ -18,6 +18,34 @@ const addTransactionBtnEl = document.getElementById("transaction-btn");
 const amountTypeEl = document.getElementById("amountType");
 const listEl = document.getElementById("list");
 
+const showItem = (transactions) => {
+  transactions.map((transaction) => {
+    const { id, date, description, amount, amountType } = transaction;
+    let amt = "";
+    const listItem = document.createElement("li");
+
+    // Check the type of transaction (Income or Expense)
+    if (amountType === "Income") {
+      listItem.className = "income"; // Set class to "income" for styling
+      amt = `${amount}`; // Set the amount for display
+    } else {
+      listItem.className = "expense"; // Set class to "expense" for styling
+      amt = `- ${amount}`; // Set the amount with a '-' sign for display
+    }
+
+    // Update the list item's HTML content
+    listItem.innerHTML = `
+      <span class="date">${date}</span>
+      <span class="descriptionInput">${description}</span>
+      <span class="amt">${amount}</span>
+      <button class="btnDelete" onClick="deleteItem(${id})">X</button>
+    `;
+
+    // Append the list item to the transaction history list
+    listEl.appendChild(listItem);
+  });
+};
+
 addTransactionBtnEl.addEventListener("click", function (event) {
   if (
     !inputFieldEl ||
@@ -48,6 +76,7 @@ addTransactionBtnEl.addEventListener("click", function (event) {
     amount: amountInput,
     amountType, // You may need to add an amount field to your input form
   });
-  console.log(transactionInDB);
+
   inputFieldEl.value = "";
+  inputAmountEl.value = "";
 });
