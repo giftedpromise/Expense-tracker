@@ -48,6 +48,6 @@ addTransactionBtnEl.addEventListener("click", function (event) {
     amount: amountInput,
     amountType, // You may need to add an amount field to your input form
   });
-
+  console.log(transactionInDB);
   inputFieldEl.value = "";
 });
