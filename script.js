@@ -12,6 +12,10 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const transactionInDB = ref(database, "transaction");
 
+const balanceAmtEl = document.getElementById("balanceAmount");
+const incomeAmtEl = document.getElementById("incomeAmount");
+const expenseAmtEl = document.getElementById("expenseAmount");
+
 const inputFieldEl = document.getElementById("inputTitle");
 const inputAmountEl = document.getElementById("inputAmount");
 const addTransactionBtnEl = document.getElementById("transaction-btn");
