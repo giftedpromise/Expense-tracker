@@ -3,7 +3,9 @@ import {
   getDatabase,
   ref,
   push,
+  onValue,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
 const appSettings = {
   databaseURL: "https://expense-tracker-9c5fb-default-rtdb.firebaseio.com/",
 };
@@ -85,10 +87,10 @@ const calculateValue = (transactions) => {
 };
 
 const init = () => {
-  // Fetch data from Firebase and update transactions array
-  get(ref(transactionInDB), (snapshot) => {
+  onValue(ref(transactionInDB), (snapshot) => {
     if (snapshot.exists()) {
-      transactions = Object.values(snapshot.val());
+      const data = snapshot.val();
+      transactions = data ? Object.values(data) : [];
       showItem(transactions);
       calculateValue(transactions);
     }
