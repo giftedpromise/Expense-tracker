@@ -219,14 +219,14 @@ button:hover {
   color: red;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   body {
     height: 100%;
   }
 
   .inputTitle {
     height: 30px;
-    width: 320px;
+    width: 330px;
     margin-top: 10px;
   }
 }
