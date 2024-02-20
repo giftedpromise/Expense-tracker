@@ -1,11 +1,10 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
   getDatabase,
   ref,
   push,
   onValue,
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 const appSettings = {
   databaseURL: "https://expense-tracker-9c5fb-default-rtdb.firebaseio.com/",
 };
