@@ -191,9 +191,11 @@ button:hover {
   background-color: red;
   top: 50%;
   left: 0;
+  width: 20px; /* Set the width */
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   padding: 12px 7px;
+  margin: 0;
   transform: translate(-100%, -50%);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -201,6 +203,7 @@ button:hover {
 
 .list li:hover .btnDelete {
   opacity: 1;
+  background-color: red;
 }
 .date {
   font-size: 1rem;
@@ -214,4 +217,12 @@ button:hover {
 
 .amt {
   color: red;
+}
+
+@media screen and (max-width: 768px) {
+  .inputTitle {
+    height: 30px;
+    width: 300px;
+    margin-top: 10px;
+  }
 }
