@@ -21,6 +21,11 @@ const inputAmountEl = document.getElementById("inputAmount");
 const addTransactionBtnEl = document.getElementById("transaction-btn");
 const amountTypeEl = document.getElementById("amountType");
 const listEl = document.getElementById("list");
+let transactions = [];
+
+let income = 0;
+let expense = 0;
+let balance = 0;
 
 const showItem = (transactions) => {
   transactions.map((transaction) => {
@@ -50,6 +55,46 @@ const showItem = (transactions) => {
   });
 };
 
+const updateBalance = () => {
+  // Assuming you have defined elements like balanceAmtEl, incomeAmtEl, and expenseAmtEl
+  balanceAmtEl.innerHTML = `₹ ${balance.toFixed(2)}`; // Display balance with two decimal places
+  incomeAmtEl.innerHTML = `₹ ${income.toFixed(2)}`;
+  expenseAmtEl.innerHTML = `₹ ${expense.toFixed(2)}`;
+};
+
+const calculateValue = (transactions) => {
+  // Initialize arrays to store income and expense amounts
+  const incomeArray = [];
+  const expenseArray = [];
+
+  // Map through transactions and categorize amounts into incomeArray or expenseArray
+  transactions.map((value) => {
+    const number = Number(value.amount);
+    value.amountType === "Income"
+      ? incomeArray.push(number)
+      : expenseArray.push(number);
+  });
+
+  // Calculate total income, total expense, and overall balance
+  income = incomeArray.reduce((prev, val) => prev + val, 0);
+  expense = expenseArray.reduce((prev, val) => prev + val, 0);
+  balance = income - expense;
+
+  // Update the display with new values
+  updateBalance();
+};
+
+const init = () => {
+  // Fetch data from Firebase and update transactions array
+  get(ref(transactionInDB), (snapshot) => {
+    if (snapshot.exists()) {
+      transactions = Object.values(snapshot.val());
+      showItem(transactions);
+      calculateValue(transactions);
+    }
+  });
+};
+
 addTransactionBtnEl.addEventListener("click", function (event) {
   if (
     !inputFieldEl ||
@@ -73,14 +118,20 @@ addTransactionBtnEl.addEventListener("click", function (event) {
   const currentDate = `${day}-${month}-${year}`;
   console.log(currentDate);
 
+  // Using .then() to handle the asynchronous nature of push
   push(transactionInDB, {
     id: Date.now(),
     date: currentDate,
     description: transactionInput,
     amount: amountInput,
     amountType, // You may need to add an amount field to your input form
-  });
+  }).then(() => {
+    // Update the balance after adding a new transaction
+    calculateValue(transactions);
 
-  inputFieldEl.value = "";
-  inputAmountEl.value = "";
+    inputFieldEl.value = "";
+    inputAmountEl.value = "";
+  });
 });
+
+init();
